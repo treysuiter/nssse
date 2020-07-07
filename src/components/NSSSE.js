@@ -5,7 +5,6 @@ import ApplicationViews from "./ApplicattionViews";
 const NSSSE = () => {
   return (
     <>
-      {/* <NavBar /> */}
       <ApplicationViews />
     </>
   );

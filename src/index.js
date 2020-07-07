@@ -1,11 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import NSSSE from './components/NSSSE'
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <NSSSE />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+    <Router>
+      <NSSSE />
+    </Router>,
+    document.getElementById("root")
+  );
