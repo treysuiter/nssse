@@ -1,8 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import socket from "../../modules/FinnhubManager"
-
+import StockManager from "../../modules/StockManager"
 
 const Dashboard = props => {
+
+    const [stock, setStock] = useState({})
+
+    const getStock = () => {
+        return StockManager.getStock('AAPL')
+            .then(result => {
+                setStock(result)
+            });
+    };
+
+    useEffect(() => {
+        getStock();
+    }, []);
+
+
 
     return (
         <div>

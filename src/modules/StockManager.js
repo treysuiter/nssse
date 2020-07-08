@@ -1,3 +1,5 @@
+import rapidToken from "./RapidKey"
+
 const remoteURL = "http://localhost:5002"
 
 export default {
@@ -31,5 +33,16 @@ export default {
             },
             body: JSON.stringify(editedAnimal)
         }).then(data => data.json());
+    },
+    getStock(symbol) {
+        return fetch(`https://cors-anywhere.herokuapp.com/https://alpha-vantage.p.rapidapi.com/query?symbol=${symbol}&function=GLOBAL_QUOTE`, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "alpha-vantage.p.rapidapi.com",
+                "x-rapidapi-key": `${rapidToken}`
+            }
+        }).then(data => data.json()).catch(err => {
+            console.log(err);
+        })
     }
 }
