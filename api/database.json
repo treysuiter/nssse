@@ -1,0 +1,24 @@
+{
+    "Stocks": [
+        {
+            "id": 1,
+            "symbol": "AAPL"
+        },
+        {
+            "id": 2,
+            "symbol": "IBM"
+        },
+        {
+            "id": 3,
+            "symbol": "INTC"
+        },
+        {
+            "id": 4,
+            "symbol": "MSFT"
+        },
+        {
+            "id": 5,
+            "symbol": "CSCO"
+        }
+    ]
+}

@@ -1,4 +1,4 @@
-import rapidToken from "./RapidKey"
+import alphaToken from "./AlphaKey"
 
 const remoteURL = "http://localhost:5002"
 
@@ -35,14 +35,8 @@ export default {
         }).then(data => data.json());
     },
     getStock(symbol) {
-        return fetch(`https://cors-anywhere.herokuapp.com/https://alpha-vantage.p.rapidapi.com/query?symbol=${symbol}&function=GLOBAL_QUOTE`, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "alpha-vantage.p.rapidapi.com",
-                "x-rapidapi-key": `${rapidToken}`
-            }
-        }).then(data => data.json()).catch(err => {
-            console.log(err);
-        })
+        return fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${alphaToken}`)
+            .then(data => data.json())
     }
+
 }
