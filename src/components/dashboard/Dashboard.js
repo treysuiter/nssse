@@ -1,48 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import StockManager from "../../modules/StockManager"
+import StockCard from "./StockCard"
 
 const Dashboard = props => {
 
-    const [stock, setStock] = useState({ name: "", price: "" })
-    const [stockArray, setStockNames] = useState([])
+    const [stockArray, setStockArray] = useState([])
 
     const getStocks = () => {
         let stocksAndPriceArray = []
-        let allStocksArray = []
-        StockManager.getAll("stocks")
+        return StockManager.getAll("stocks")
             .then(result => {
-                allStocksArray = result
-                allStocksArray.forEach(element => {
+                let stockListFromDB = result
+                stockListFromDB.forEach(element => {
                     StockManager.getStock(`${element.symbol}`)
-                    .then(result => {
-                        console.log(result, 'result')
-                        stocksAndPriceArray.push({symbol: result["Global Quote"]["01. symbol"], price: result["Global Quote"]["05. price"]})
-                        console.log(stocksAndPriceArray, 'array')
-                    })
+                        .then(result => {
+                            stocksAndPriceArray.push({ symbol: result["Global Quote"]["01. symbol"], price: result["Global Quote"]["05. price"] })
+                        })
                 })
-
+                // console.log(stocksAndPriceArray, 'test')
+                // setStockNamesAndPrice(stocksAndPriceArray)
+                return stocksAndPriceArray
             }
             )
-        // return StockManager.getStock("IBM")
-        //     .then(result => {
-        //         setStock({
-        //             name: result["Global Quote"]["01. symbol"],
-        //             price: result["Global Quote"]["05. price"]
-        //         })
-        //     });
+            .then(result => {
+                console.log(result, 'result')
+                setStockArray(result)
+                console.log(stockArray, 'state')
+            }
+            )
     };
 
     useEffect(() => {
         getStocks();
     }, []);
 
-
-
     return (
-        <div>
-            Dashboard
-            <h3>{stock.name} {stock.price}</h3>
-        </div>
+        <>
+            <div>
+                {stockArray.map(stock =>
+                    <StockCard key={stock.id} stock={stock} />)}
+            </div>
+        </>
     )
 }
 
